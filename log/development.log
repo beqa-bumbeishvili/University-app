@@ -1,0 +1,2486 @@
+  [1m[35m (109.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (83.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3034178888035282470);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateSchools (20170421022452)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (90.4ms)[0m  [1m[35mCREATE TABLE "schools" ("id" serial primary key, "name" character varying NOT NULL, "address" character varying, "student_amount" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170421022452"]]
+  [1m[35m (17.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStudents (20170421022658)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (81.4ms)[0m  [1m[35mCREATE TABLE "students" ("id" serial primary key, "name" character varying NOT NULL, "last_name" character varying NOT NULL, "person_id" integer, "birth_date" date, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170421022658"]]
+  [1m[35m (12.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2017-04-21 02:42:42 UTC], ["updated_at", 2017-04-21 02:42:42 UTC]]
+  [1m[35m (4.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3034178888035282470)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Started GET "/" for 127.0.0.1 at 2017-04-21 06:52:11 +0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Parameters: {"internal"=>true}
+  Rendering /home/beqa/vendor/bundle/gems/railties-5.0.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/railties-5.0.2/lib/rails/templates/rails/welcome/index.html.erb (7.7ms)
+Completed 200 OK in 92ms (Views: 36.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 06:52:19 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/new.html.erb within layouts/application (142.7ms)
+Completed 200 OK in 2530ms (Views: 2492.7ms | ActiveRecord: 9.3ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 06:52:43 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mpHd1D8A8qQvA7hE0FJ63JGF2RXVuRj8NgJuLI9Ghb1aqra0QJqILTlEA2num9LbYZytXY9w/ZGdSFGOyT7NXQ==", "school"=>{"name"=>"51-s sajaro", "address"=>"filarmoniastanaa", "student_amount"=>"300"}, "commit"=>"Save School"}
+Unpermitted parameter: student_amount
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "51-s sajaro"], ["address", "filarmoniastanaa"], ["created_at", 2017-04-21 02:52:43 UTC], ["updated_at", 2017-04-21 02:52:43 UTC]]
+  [1m[35m (62.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/1
+Completed 302 Found in 73ms (ActiveRecord: 64.1ms)
+
+
+Started GET "/schools/1" for 127.0.0.1 at 2017-04-21 06:52:43 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 406 Not Acceptable in 47ms (ActiveRecord: 1.0ms)
+
+
+  
+ActionController::UnknownFormat (SchoolsController#show is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+actionpack (5.0.2) lib/action_controller/metal/implicit_render.rb:56:in `default_render'
+actionpack (5.0.2) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+actionpack (5.0.2) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+actionpack (5.0.2) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+actionpack (5.0.2) lib/abstract_controller/base.rb:188:in `process_action'
+actionpack (5.0.2) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.0.2) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+activesupport (5.0.2) lib/active_support/callbacks.rb:126:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:506:in `block (2 levels) in compile'
+activesupport (5.0.2) lib/active_support/callbacks.rb:455:in `call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_process_action_callbacks'
+activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.2) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.0.2) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.0.2) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.0.2) lib/active_support/notifications.rb:164:in `block in instrument'
+activesupport (5.0.2) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.0.2) lib/active_support/notifications.rb:164:in `instrument'
+actionpack (5.0.2) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.0.2) lib/action_controller/metal/params_wrapper.rb:248:in `process_action'
+activerecord (5.0.2) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.2) lib/abstract_controller/base.rb:126:in `process'
+actionview (5.0.2) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.2) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.2) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.2) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.2) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.2) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+rack (2.0.1) lib/rack/session/abstract/id.rb:222:in `context'
+rack (2.0.1) lib/rack/session/abstract/id.rb:216:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.2) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.2) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (8.1ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (46.6ms)
+Started GET "/schools/1" for 127.0.0.1 at 2017-04-21 07:11:00 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 209ms (Views: 182.9ms | ActiveRecord: 8.3ms)
+
+
+Started GET "/schools/" for 127.0.0.1 at 2017-04-21 07:11:07 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 47ms (Views: 43.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:11:09 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (5.1ms)
+  Rendered schools/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 70ms (Views: 53.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:12:09 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"JMlOZePhUaqEp9GSdrfp+CzPwTu5fNoj+ql7JXlXVYygZYLWe3jHnxdUhnFpEctj93P3WTNCuNBJ0imaWSLpYA==", "school"=>{"name"=>"24-e", "address"=>"qutaisi", "student_amount"=>"150"}, "commit"=>"Save School"}
+Unpermitted parameter: student_amount
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "24-e"], ["address", "qutaisi"], ["created_at", 2017-04-21 03:12:09 UTC], ["updated_at", 2017-04-21 03:12:09 UTC]]
+  [1m[35m (50.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/2
+Completed 302 Found in 59ms (ActiveRecord: 51.9ms)
+
+
+Started GET "/schools/2" for 127.0.0.1 at 2017-04-21 07:12:09 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 45ms (Views: 41.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:13:23 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.8ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (13.5ms)
+Completed 200 OK in 61ms (Views: 54.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:13:25 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (6.2ms)
+  Rendered schools/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 52ms (Views: 49.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:13:30 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1Kp6EGsXV2zpm6cDtDASUOrFr8pUc5wEZ2SsSQsfit5QBraj847BWXpo8OCrljDLMXmZqN5N/vfUH/72K2o2Mg==", "school"=>{"name"=>"dasds", "address"=>"dssa", "student_amount"=>"12"}, "commit"=>"Save School"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.7ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dasds"], ["address", "dssa"], ["student_amount", 12], ["created_at", 2017-04-21 03:13:30 UTC], ["updated_at", 2017-04-21 03:13:30 UTC]]
+  [1m[35m (29.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/3
+Completed 302 Found in 39ms (ActiveRecord: 31.3ms)
+
+
+Started GET "/schools/3" for 127.0.0.1 at 2017-04-21 07:13:30 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 48ms (Views: 43.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:13:32 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 53ms (Views: 50.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:13:40 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (4.6ms)
+  Rendered schools/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 48ms (Views: 45.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:13:41 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7fIkNt1rK5ObL+1VgRO3mglTJHo8GwWgYKwVFau5PH9pXuiFRfK9pgjcuraetZUB0u8SGLYlZ1PT10eqi8yAkw==", "school"=>{"name"=>"", "address"=>"", "student_amount"=>""}, "commit"=>"Save School"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (5.8ms)
+  Rendered schools/new.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 52ms (Views: 46.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:24:07 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (13.1ms)
+Completed 200 OK in 87ms (Views: 81.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:24:09 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (4.5ms)
+  Rendered schools/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 52ms (Views: 50.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:24:18 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"BnD/RbwqxlUyP7LEoBskhcNjl0tOXA9aojfySIjohVqC3DP2JLNQYKHM5Se/vQYeGN+hKcRibakRTKD3qJ05tg==", "school"=>{"name"=>"new sho", "address"=>"ssasa", "student_amount"=>"sdsas"}, "commit"=>"Save School"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "new sho"], ["address", "ssasa"], ["student_amount", 0], ["created_at", 2017-04-21 03:24:18 UTC], ["updated_at", 2017-04-21 03:24:18 UTC]]
+  [1m[35m (48.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/4
+Completed 302 Found in 55ms (ActiveRecord: 49.4ms)
+
+
+Started GET "/schools/4" for 127.0.0.1 at 2017-04-21 07:24:18 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 45ms (Views: 40.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:24:20 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 48ms (Views: 46.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools.1" for 127.0.0.1 at 2017-04-21 07:24:22 +0400
+Processing by SchoolsController#index as 
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 60ms (Views: 50.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/schools.1" for 127.0.0.1 at 2017-04-21 07:24:47 +0400
+Processing by SchoolsController#index as 
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 59ms (Views: 52.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/schools.1" for 127.0.0.1 at 2017-04-21 07:24:49 +0400
+Processing by SchoolsController#index as 
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 52ms (Views: 44.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/schools/1" for 127.0.0.1 at 2017-04-21 07:24:50 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSchool Load (0.3ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 58ms (Views: 54.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools/1/edit" for 127.0.0.1 at 2017-04-21 07:24:52 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/_form.html.erb (4.0ms)
+  Rendered schools/edit.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 53ms (Views: 49.3ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:24:58 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XuGXQjxEvMvtDSjnrMIJ9GJO1alZkLqig8C1hrrjY7zaTVvxpN0q/n7+fwSzZCtvufLjy9Ou2FEwu+c5mpbfUA==", "school"=>{"name"=>"51-s sajaro", "address"=>"filarmoniastanaa", "student_amount"=>"200"}, "commit"=>"Save School"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "51-s sajaro"], ["address", "filarmoniastanaa"], ["student_amount", 200], ["created_at", 2017-04-21 03:24:58 UTC], ["updated_at", 2017-04-21 03:24:58 UTC]]
+  [1m[35m (16.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/5
+Completed 302 Found in 23ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/schools/5" for 127.0.0.1 at 2017-04-21 07:24:58 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 44ms (Views: 40.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:24:59 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 52ms (Views: 49.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:27:02 +0400
+  
+SyntaxError (/home/beqa/RubymineProjects/University/app/controllers/schools_controller.rb:54: syntax error, unexpected keyword_end, expecting end-of-input):
+  
+app/controllers/schools_controller.rb:54: syntax error, unexpected keyword_end, expecting end-of-input
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.8ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (36.2ms)
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:27:11 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 78ms (Views: 71.9ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/schools.1" for 127.0.0.1 at 2017-04-21 07:27:17 +0400
+  
+ActionController::RoutingError (No route matches [DELETE] "/schools.1"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [17 times] (37.9ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (17.3ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.3ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (114.8ms)
+Started GET "/schools/1" for 127.0.0.1 at 2017-04-21 07:27:44 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 42ms (Views: 37.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools.1" for 127.0.0.1 at 2017-04-21 07:28:47 +0400
+Processing by SchoolsController#index as 
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 51ms (Views: 43.7ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/schools/1" for 127.0.0.1 at 2017-04-21 07:28:52 +0400
+Processing by SchoolsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"MrN+uBpvpfa6Se8jrCbvL4EhguIsvALSKhIp9LUBbMDyiBXYZfXff6wOVA6S70cocTj2qnZ157+BWBZW83kkIA==", "id"=>"1"}
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schools" WHERE "schools"."id" = $1[0m  [["id", 1]]
+  [1m[35m (28.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools
+Completed 302 Found in 35ms (ActiveRecord: 30.0ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:28:52 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 46ms (Views: 43.7ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/schools/2" for 127.0.0.1 at 2017-04-21 07:28:56 +0400
+Processing by SchoolsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"QUzVs0avLLYSXz+zMd0wmMgJ1PqYYaTOAfkqY1OsG2qBd77TOTVWPwQYhJ4PFJifOBCgssKoQaOqsxXBFdRTig==", "id"=>"2"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schools" WHERE "schools"."id" = $1[0m  [["id", 2]]
+  [1m[35m (23.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools
+Completed 302 Found in 29ms (ActiveRecord: 25.2ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:28:56 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 49ms (Views: 46.5ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/schools/4" for 127.0.0.1 at 2017-04-21 07:28:58 +0400
+Processing by SchoolsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"q+IdJAg9dp3omPqM6R9L/iZabMQHRt/nBwyqMALzRBtr2XZEd6cMFP7fQaHX1uP51kMYjF2POoqsRpWSRIsM+w==", "id"=>"4"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (4.3ms)[0m  [1m[31mDELETE FROM "schools" WHERE "schools"."id" = $1[0m  [["id", 4]]
+  [1m[35m (13.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools
+Completed 302 Found in 23ms (ActiveRecord: 18.9ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:28:58 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 49ms (Views: 46.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:29:00 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (5.0ms)
+  Rendered schools/new.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 49ms (Views: 47.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:29:05 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"IzmMkev/5aCfwPixdCFs26tR5C9KCqg3YLKz6fkQsDCnlUAic2ZzlQwzr1Jrh05AcO3STcA0ysTTyeFW2WUM3A==", "school"=>{"name"=>"saaas", "address"=>"Asasasa", "student_amount"=>"saSAS"}, "commit"=>"Save School"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "saaas"], ["address", "Asasasa"], ["student_amount", 0], ["created_at", 2017-04-21 03:29:05 UTC], ["updated_at", 2017-04-21 03:29:05 UTC]]
+  [1m[35m (53.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/6
+Completed 302 Found in 60ms (ActiveRecord: 54.6ms)
+
+
+Started GET "/schools/6" for 127.0.0.1 at 2017-04-21 07:29:05 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 57ms (Views: 53.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/schools/6/edit" for 127.0.0.1 at 2017-04-21 07:29:11 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/_form.html.erb (4.2ms)
+  Rendered schools/edit.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 52ms (Views: 48.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:29:14 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hUi4hSBuXgIQJk7iM84BOORiVY7jO1t5fmGjzvSgtm8B5HQ2uPfIN4PVGQEsaCOjP95j7GkFOYrNGvFx1NUKgw==", "school"=>{"name"=>"saaas", "address"=>"Asasasa", "student_amount"=>"23"}, "commit"=>"Save School"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "saaas"], ["address", "Asasasa"], ["student_amount", 23], ["created_at", 2017-04-21 03:29:14 UTC], ["updated_at", 2017-04-21 03:29:14 UTC]]
+  [1m[35m (12.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/7
+Completed 302 Found in 18ms (ActiveRecord: 13.1ms)
+
+
+Started GET "/schools/7" for 127.0.0.1 at 2017-04-21 07:29:14 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 48ms (Views: 43.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:29:16 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 47ms (Views: 44.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:29:17 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (3.9ms)
+  Rendered schools/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 47ms (Views: 45.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:29:22 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vN4a0+TdMI/3fC+kJHrXdVaDfsDuBFqdjBplc//lUuE4ctZgfESmumSPeEc73PXujT9IomQ6OG4/YTfM35DuDQ==", "school"=>{"name"=>"DSSAD", "address"=>"DDSASDA", "student_amount"=>"4"}, "commit"=>"Save School"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "DSSAD"], ["address", "DDSASDA"], ["student_amount", 4], ["created_at", 2017-04-21 03:29:22 UTC], ["updated_at", 2017-04-21 03:29:22 UTC]]
+  [1m[35m (22.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/8
+Completed 302 Found in 29ms (ActiveRecord: 23.4ms)
+
+
+Started GET "/schools/8" for 127.0.0.1 at 2017-04-21 07:29:22 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 41ms (Views: 37.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:29:24 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 51ms (Views: 49.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:29:25 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (4.0ms)
+  Rendered schools/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 49ms (Views: 47.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:29:29 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kQz8IYwpp/26+v4h0ASo0CKS6fCYH+Z7+NvxTsVhSy8VoDCSFLAxyCkJqcLPoopL+S7fkhIhhIhLoKPx5RT3ww==", "school"=>{"name"=>"", "address"=>"dsDSSD", "student_amount"=>"4"}, "commit"=>"Save School"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (5.6ms)
+  Rendered schools/new.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 52ms (Views: 47.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:29:31 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 57ms (Views: 54.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools/7" for 127.0.0.1 at 2017-04-21 07:29:40 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 45ms (Views: 41.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/schools/8/edit" for 127.0.0.1 at 2017-04-21 07:29:43 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/_form.html.erb (4.2ms)
+  Rendered schools/edit.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 51ms (Views: 47.5ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/schools/6" for 127.0.0.1 at 2017-04-21 07:29:48 +0400
+Processing by SchoolsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"IAXQpBmqmY8sbue+7NRvsTqR2Av5qeskOqwblnhCc3XgPrvEZjDjBjopXJPSHce2yoisQ6NgDkmR5iQ0Pjo7lQ==", "id"=>"6"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schools" WHERE "schools"."id" = $1[0m  [["id", 6]]
+  [1m[35m (16.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools
+Completed 302 Found in 23ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:29:48 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 48ms (Views: 45.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/welcome/index" for 127.0.0.1 at 2017-04-21 07:29:57 +0400
+  
+ActionController::RoutingError (No route matches [GET] "/welcome/index"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [17 times] (8.2ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (46.2ms)
+Started GET "/welcome" for 127.0.0.1 at 2017-04-21 07:30:01 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 58ms (Views: 55.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:30:03 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 52ms (Views: 49.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:30:32 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 63ms (Views: 57.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-21 07:30:36 +0400
+Processing by Rails::WelcomeController#index as HTML
+  Parameters: {"internal"=>true}
+  Rendering /home/beqa/vendor/bundle/gems/railties-5.0.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/railties-5.0.2/lib/rails/templates/rails/welcome/index.html.erb (5.4ms)
+Completed 200 OK in 9ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/welcome/index" for 127.0.0.1 at 2017-04-21 07:30:38 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 56ms (Views: 53.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-21 07:30:53 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 41ms (Views: 39.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:30:56 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (20.1ms)
+Completed 200 OK in 64ms (Views: 50.8ms | ActiveRecord: 6.8ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:30:59 +0400
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for StudentsController):
+  
+actionpack (5.0.2) lib/abstract_controller/base.rb:121:in `process'
+actionview (5.0.2) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.2) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.2) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.2) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.2) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.2) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.2) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.2) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+rack (2.0.1) lib/rack/session/abstract/id.rb:222:in `context'
+rack (2.0.1) lib/rack/session/abstract/id.rb:216:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.0.2) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.2) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.2) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.2) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.2) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout (0.7ms)
+Started GET "/" for 127.0.0.1 at 2017-04-21 07:31:01 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 47ms (Views: 45.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:39:43 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/index.html.erb within layouts/application (5.5ms)
+Completed 500 Internal Server Error in 91ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    10:     <th>Students Amount</th>
+    11:   </tr>
+    12: 
+    13:   <% @students.each do |student| %>
+    14:       <tr>
+    15:         <td><%= student.name %></td>
+    16:         <td><%= student.address %></td>
+  
+app/views/students/index.html.erb:13:in `_app_views_students_index_html_erb___4527371726450141694_69902810861220'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (8.5ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (40.1ms)
+Started GET "/new" for 127.0.0.1 at 2017-04-21 07:39:51 +0400
+  
+ActionController::RoutingError (No route matches [GET] "/new"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (9.6ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (50.0ms)
+Started GET "/student/new" for 127.0.0.1 at 2017-04-21 07:39:58 +0400
+  
+ActionController::RoutingError (No route matches [GET] "/student/new"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (8.8ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.2ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (47.3ms)
+Started GET "/students/new" for 127.0.0.1 at 2017-04-21 07:40:02 +0400
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (6.7ms)
+  Rendered students/new.html.erb within layouts/application (27.2ms)
+Completed 200 OK in 133ms (Views: 110.1ms | ActiveRecord: 10.0ms)
+
+
+Started GET "/students/new" for 127.0.0.1 at 2017-04-21 07:40:32 +0400
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (347.1ms)
+  Rendered students/new.html.erb within layouts/application (349.5ms)
+Completed 200 OK in 391ms (Views: 388.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/students/new" for 127.0.0.1 at 2017-04-21 07:41:02 +0400
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (25.3ms)
+  Rendered students/new.html.erb within layouts/application (27.3ms)
+Completed 200 OK in 71ms (Views: 68.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/students/new" for 127.0.0.1 at 2017-04-21 07:41:13 +0400
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (4.3ms)
+  Rendered students/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 47ms (Views: 44.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:41:19 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7rA2eWG1x+geqiSIFoqFX/m+uZzqyouMG51O99miYvkui10ZHi+9YQjtn6UoQy1YCafN1LADbuGw13FVn9oqGQ==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"dsasaassa", "birth_date"=>"dsaddssa"}, "commit"=>"Save Student"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (34.3ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 0], ["created_at", 2017-04-21 03:41:19 UTC], ["updated_at", 2017-04-21 03:41:19 UTC]]
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/1
+Completed 302 Found in 80ms (ActiveRecord: 74.1ms)
+
+
+Started GET "/students/1" for 127.0.0.1 at 2017-04-21 07:41:19 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 63ms (Views: 55.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/students/1" for 127.0.0.1 at 2017-04-21 07:41:55 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 79ms (Views: 49.7ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/students/1/edit" for 127.0.0.1 at 2017-04-21 07:41:58 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (5.5ms)
+  Rendered students/edit.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 66ms (Views: 61.6ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:42:01 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RiiRZ0kO1inQl+C1ISyihS2JPlEgle0FxKlsN9tZFZvaXjycXs+/sy9Ek4wTE6xoHOTWPqbnGuIjDxDL2Eh85g==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"0", "birth_date"=>"s"}, "commit"=>"Save Student"}
+Unpermitted parameter: birth_date
+  [1m[35m (2.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 0], ["created_at", 2017-04-21 03:42:01 UTC], ["updated_at", 2017-04-21 03:42:01 UTC]]
+  [1m[35m (22.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/2
+Completed 302 Found in 32ms (ActiveRecord: 25.8ms)
+
+
+Started GET "/students/2" for 127.0.0.1 at 2017-04-21 07:42:01 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 45ms (Views: 41.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:42:03 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/index.html.erb within layouts/application (5.5ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    10:     <th>Students Amount</th>
+    11:   </tr>
+    12: 
+    13:   <% @students.each do |student| %>
+    14:       <tr>
+    15:         <td><%= student.name %></td>
+    16:         <td><%= student.address %></td>
+  
+app/views/students/index.html.erb:13:in `_app_views_students_index_html_erb___4527371726450141694_69902941998720'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (8.3ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (38.0ms)
+Started GET "/students/2" for 127.0.0.1 at 2017-04-21 07:42:08 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mStudent Load (0.8ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 49ms (Views: 45.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/students/2" for 127.0.0.1 at 2017-04-21 07:42:43 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 68ms (Views: 48.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:42:44 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (22.5ms)
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `address' for #<Student:0x007f26f4229080>):
+    13:   <% @students.each do |student| %>
+    14:       <tr>
+    15:         <td><%= student.name %></td>
+    16:         <td><%= student.address %></td>
+    17:         <td><%= student.student_amount %></td>
+    18:         <td><%= link_to 'Show', student_path(student) %></td>
+    19:         <td><%= link_to 'Edit', edit_student_path(student) %></td>
+  
+app/views/students/index.html.erb:16:in `block in _app_views_students_index_html_erb___4527371726450141694_69902640818920'
+app/views/students/index.html.erb:13:in `_app_views_students_index_html_erb___4527371726450141694_69902640818920'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (9.3ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (40.3ms)
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:43:22 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 46ms (Views: 43.3ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/students/1" for 127.0.0.1 at 2017-04-21 07:43:26 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"uAfvSf4ZpuI7eV+VWrBYX9aoPpg7MED4W8Sq5eP5cHh4PIQpgYPcay0+5LhkefBYJrFK0GH5pZXwjpVHpYE4mA==", "id"=>"1"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 1]]
+  [1m[35m (12.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 18ms (ActiveRecord: 13.7ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:43:26 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (1.1ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 48ms (Views: 45.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/students/2" for 127.0.0.1 at 2017-04-21 07:43:28 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 46ms (Views: 42.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:43:30 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 50ms (Views: 47.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/2/edit" for 127.0.0.1 at 2017-04-21 07:43:31 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (6.3ms)
+  Rendered students/edit.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 52ms (Views: 48.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:43:38 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1yJRHJuLfrm/zYCVLtPovktCehGmR0EwaOFDTloR/DpLVPznjEoXI0Ae86wc7OZTei+SfiA1ttePRz+yWQCVRw==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"0", "birth_date"=>"10-12-2017"}, "commit"=>"Save Student"}
+Unpermitted parameter: birth_date
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 0], ["created_at", 2017-04-21 03:43:38 UTC], ["updated_at", 2017-04-21 03:43:38 UTC]]
+  [1m[35m (48.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/3
+Completed 302 Found in 56ms (ActiveRecord: 49.6ms)
+
+
+Started GET "/students/3" for 127.0.0.1 at 2017-04-21 07:43:38 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 45ms (Views: 40.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/students/3" for 127.0.0.1 at 2017-04-21 07:43:59 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 87ms (Views: 62.4ms | ActiveRecord: 7.0ms)
+
+
+Started GET "/students/3/edit" for 127.0.0.1 at 2017-04-21 07:44:01 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (5.2ms)
+  Rendered students/edit.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 49ms (Views: 45.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:44:03 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TgAmSfrPt8DfU+NLH7TOMduz/PbH+xQDZObwaCijAHrSdouy7Q7eWiCAkHIti8Dc6t4UmUGJ4+SDQIyUK7JpBw==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"0", "birth_date"=>"2"}, "commit"=>"Save Student"}
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 0], ["created_at", 2017-04-21 03:44:03 UTC], ["updated_at", 2017-04-21 03:44:03 UTC]]
+  [1m[35m (21.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/4
+Completed 302 Found in 31ms (ActiveRecord: 22.6ms)
+
+
+Started GET "/students/4" for 127.0.0.1 at 2017-04-21 07:44:03 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 42ms (Views: 39.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/4/edit" for 127.0.0.1 at 2017-04-21 07:44:29 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (8.1ms)
+  Rendered students/edit.html.erb within layouts/application (10.3ms)
+Completed 200 OK in 54ms (Views: 50.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:44:30 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"m06hpxlaDzQsQ+/G3WJFKGbP5hr/xHQh4l5reLrTIMYHOAxcDptmrtOQnP/vXUvFV6IOdXm2g8YF+BeEucJJuw==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"0", "birth_date(1i)"=>"2017", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "birth_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 0], ["birth_date", Fri, 21 Apr 2017], ["created_at", 2017-04-21 03:44:30 UTC], ["updated_at", 2017-04-21 03:44:30 UTC]]
+  [1m[35m (10.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/5
+Completed 302 Found in 18ms (ActiveRecord: 11.3ms)
+
+
+Started GET "/students/5" for 127.0.0.1 at 2017-04-21 07:44:30 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 41ms (Views: 37.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:45:11 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (1.1ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 49ms (Views: 46.2ms | ActiveRecord: 1.1ms)
+
+
+Started DELETE "/students/4" for 127.0.0.1 at 2017-04-21 07:45:16 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"ZfXdYEm6SoS41XPmwYuL0vNxHnBUxc2w9aoo2M6ayfGlzrYANiAwDa6SyMv/QiPVA2hqOA4MKN1e4Bd6iOKBEQ==", "id"=>"4"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 4]]
+  [1m[35m (22.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 28ms (ActiveRecord: 23.9ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:45:16 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.8ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 47ms (Views: 44.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/students/3/edit" for 127.0.0.1 at 2017-04-21 07:45:17 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (7.7ms)
+  Rendered students/edit.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 67ms (Views: 63.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:45:23 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"J/c3GrUODQbPI9VKJXGR3+j2bROiJ8jToXHu9lhl2vC7gZrhos9knDDwpnMXTp8y2ZuFfCRVPzRG15IKW3SzjQ==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"7", "birth_date(1i)"=>"2019", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "birth_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 7], ["birth_date", Sun, 21 Apr 2019], ["created_at", 2017-04-21 03:45:23 UTC], ["updated_at", 2017-04-21 03:45:23 UTC]]
+  [1m[35m (19.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/6
+Completed 302 Found in 26ms (ActiveRecord: 20.3ms)
+
+
+Started GET "/students/6" for 127.0.0.1 at 2017-04-21 07:45:23 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 54ms (Views: 50.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:45:24 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 52ms (Views: 49.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:45:42 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 49ms (Views: 46.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/3/edit" for 127.0.0.1 at 2017-04-21 07:45:43 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (8.5ms)
+  Rendered students/edit.html.erb within layouts/application (10.8ms)
+Completed 200 OK in 67ms (Views: 63.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/students/3" for 127.0.0.1 at 2017-04-21 07:45:46 +0400
+  
+ActionController::RoutingError (No route matches [POST] "/students/3"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (12.4ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.8ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.4ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (56.4ms)
+Started POST "/students/3" for 127.0.0.1 at 2017-04-21 07:46:21 +0400
+  
+ActionController::RoutingError (No route matches [POST] "/students/3"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (11.1ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (4.7ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (59.6ms)
+Started GET "/students/3/edit" for 127.0.0.1 at 2017-04-21 07:46:25 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (8.7ms)
+  Rendered students/edit.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 87ms (Views: 82.9ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:46:30 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hugKaJJiZ70DlYKAjf4Y540R6bO8VAKmJDXKFxQLgDxG02EI7fgdNBXSOa2zN7DgfQid++ad58uPf/W1UnPI3A==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"5", "birth_date(1i)"=>"2012", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "birth_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 5], ["birth_date", Sat, 21 Apr 2012], ["created_at", 2017-04-21 03:46:30 UTC], ["updated_at", 2017-04-21 03:46:30 UTC]]
+  [1m[35m (30.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/7
+Completed 302 Found in 38ms (ActiveRecord: 31.8ms)
+
+
+Started GET "/students/7" for 127.0.0.1 at 2017-04-21 07:46:30 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 45ms (Views: 42.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/7" for 127.0.0.1 at 2017-04-21 07:48:26 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 50ms (Views: 45.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:48:28 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 54ms (Views: 51.7ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/students/2" for 127.0.0.1 at 2017-04-21 07:48:32 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"Jwe+mO+txXu7p1l04rxhxU6EzS6nS6T1wTS4Fp0lJl3nPNX4kDe/8q3g4lncdcnCvp25Zv2CQZhqfoe0211uvQ==", "id"=>"2"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 2]]
+  [1m[35m (14.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 20ms (ActiveRecord: 16.0ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:48:32 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.8ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 50ms (Views: 47.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/students/7/edit" for 127.0.0.1 at 2017-04-21 07:48:33 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (7.6ms)
+  Rendered students/edit.html.erb within layouts/application (9.9ms)
+Completed 200 OK in 55ms (Views: 51.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:48:40 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vIBbVj26anu8423rCVnij1uzCM27cKSWdB5RHaSqn4Yg9vatKnsD4UMwHtI7Zuxiat7goj0CU3GTuC3hp7v2+w==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"5", "birth_date(1i)"=>"1984", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "birth_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 5], ["birth_date", Sat, 21 Apr 1984], ["created_at", 2017-04-21 03:48:40 UTC], ["updated_at", 2017-04-21 03:48:40 UTC]]
+  [1m[35m (56.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/8
+Completed 302 Found in 63ms (ActiveRecord: 57.5ms)
+
+
+Started GET "/students/8" for 127.0.0.1 at 2017-04-21 07:48:40 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 43ms (Views: 40.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:48:42 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 50ms (Views: 47.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:49:29 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (14.4ms)
+Completed 200 OK in 60ms (Views: 54.1ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/students/3" for 127.0.0.1 at 2017-04-21 07:49:33 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"+/GDQz7hbACpj53w/2tLlDL+/VbphGg9UJ+T3kCPiAU7yugjQXsWib/IJt3BouOTwueJHrNNjVD71ax8BvfA5Q==", "id"=>"3"}
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 3]]
+  [1m[35m (17.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 25ms (ActiveRecord: 19.6ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:49:33 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 49ms (Views: 46.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/students/5/edit" for 127.0.0.1 at 2017-04-21 07:49:34 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (9.0ms)
+  Rendered students/edit.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 55ms (Views: 52.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:49:38 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0f1LgunQ/vx698uPfTLu/6o+pemYX6L/a0ngeXxtVQlNi+Z5/hGXZoUkuLZPDeASm1NNhh4tVRiM75yFf3w8dA==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"7", "birth_date(1i)"=>"2001", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student"}
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "birth_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "dsads"], ["last_name", "dssads"], ["person_id", 7], ["birth_date", Sat, 21 Apr 2001], ["created_at", 2017-04-21 03:49:38 UTC], ["updated_at", 2017-04-21 03:49:38 UTC]]
+  [1m[35m (29.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/9
+Completed 302 Found in 38ms (ActiveRecord: 30.8ms)
+
+
+Started GET "/students/9" for 127.0.0.1 at 2017-04-21 07:49:38 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 45ms (Views: 41.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:49:39 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.9ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 46ms (Views: 43.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 07:49:48 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (5.2ms)
+  Rendered schools/new.html.erb within layouts/application (15.9ms)
+Completed 200 OK in 130ms (Views: 58.1ms | ActiveRecord: 10.3ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:49:50 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (1.1ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 49ms (Views: 45.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/schools/5/edit" for 127.0.0.1 at 2017-04-21 07:49:52 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/_form.html.erb (5.2ms)
+  Rendered schools/edit.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 73ms (Views: 62.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 07:49:57 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"R8IQrfRZaGdGgNGNKpKry2k9HaR33n2NwEmaNJRYvqLDbtwebMD+UtVzhm41NIlQsoErxv3gH35zMsiLtC0CTg==", "school"=>{"name"=>"51-s sajaro", "address"=>"filarmoniastanaa", "student_amount"=>"150"}, "commit"=>"Save School"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "51-s sajaro"], ["address", "filarmoniastanaa"], ["student_amount", 150], ["created_at", 2017-04-21 03:49:57 UTC], ["updated_at", 2017-04-21 03:49:57 UTC]]
+  [1m[35m (21.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/9
+Completed 302 Found in 29ms (ActiveRecord: 22.3ms)
+
+
+Started GET "/schools/9" for 127.0.0.1 at 2017-04-21 07:49:57 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 60ms (Views: 43.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:49:59 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 50ms (Views: 47.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 07:50:45 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 46ms (Views: 43.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:50:50 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 48ms (Views: 45.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/students/5/edit" for 127.0.0.1 at 2017-04-21 07:50:51 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (2.0ms)
+  Rendered students/edit.html.erb within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.4ms)
+
+
+  
+SyntaxError (/home/beqa/RubymineProjects/University/app/views/students/_form.html.erb:40: syntax error, unexpected keyword_ensure, expecting end-of-input):
+  
+app/views/students/_form.html.erb:40: syntax error, unexpected keyword_ensure, expecting end-of-input
+app/views/students/edit.html.erb:4:in `_app_views_students_edit_html_erb___2426043193915744662_69902774073520'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (9.9ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (41.1ms)
+Started GET "/students/5/edit" for 127.0.0.1 at 2017-04-21 07:51:16 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/_form.html.erb (8.6ms)
+  Rendered students/edit.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 59ms (Views: 55.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/students/5/edit" for 127.0.0.1 at 2017-04-21 07:51:20 +0400
+  
+ActionController::RoutingError (No route matches [POST] "/students/5/edit"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (9.2ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.1ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.9ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (51.2ms)
+Started GET "/students/5/edit" for 127.0.0.1 at 2017-04-21 07:55:37 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mStudent Load (2.0ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/edit.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 51ms (Views: 45.8ms | ActiveRecord: 2.0ms)
+
+
+Started PATCH "/students/5" for 127.0.0.1 at 2017-04-21 07:55:43 +0400
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lB6lb7uUr7Q7XVqRHW/dZ1unqGaUIaTtc5Ug4j749uRUJc4PxA7VPS0a4bwjpnVgq77cLs7oQYDY3x9AeIC+BA==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"7", "birth_date(1i)"=>"1999", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student", "id"=>"5"}
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `find' for nil:NilClass):
+  
+app/controllers/students_controller.rb:30:in `update'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (7.4ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.4ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (38.8ms)
+Started PATCH "/students/5" for 127.0.0.1 at 2017-04-21 07:56:19 +0400
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lB6lb7uUr7Q7XVqRHW/dZ1unqGaUIaTtc5Ug4j749uRUJc4PxA7VPS0a4bwjpnVgq77cLs7oQYDY3x9AeIC+BA==", "student"=>{"name"=>"dsads", "last_name"=>"dssads", "person_id"=>"7", "birth_date(1i)"=>"1999", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student", "id"=>"5"}
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `find' for nil:NilClass):
+  
+app/controllers/students_controller.rb:30:in `update'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.7ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (42.9ms)
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:56:26 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (22.3ms)
+Completed 200 OK in 70ms (Views: 58.6ms | ActiveRecord: 5.2ms)
+
+
+Started DELETE "/students/5" for 127.0.0.1 at 2017-04-21 07:56:29 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"0nHyZ5tzlFG5KEi4/QNpoeMigmEvkVS7q/I3Rkm8xBwSSpkH5Onu2K9v85XDysGmEzv2KXVYsdYAuAjkD8SM/A==", "id"=>"5"}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 5]]
+  [1m[35m (12.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 20ms (ActiveRecord: 14.5ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:56:29 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 49ms (Views: 46.6ms | ActiveRecord: 0.7ms)
+
+
+Started DELETE "/students/7" for 127.0.0.1 at 2017-04-21 07:56:31 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"TU9ZL7+KEyv9vmp/4sjsLR8ISUgvDUo7o8BJgTv3RvqNdDJPwBBpouv50VLcAUQq7xE9AHXEr1YIinYjfY8OGg==", "id"=>"7"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 7]]
+  [1m[35m (11.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 16ms (ActiveRecord: 12.2ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:56:32 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 63ms (Views: 60.2ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/students/9" for 127.0.0.1 at 2017-04-21 07:56:34 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"JWRqD8bzCjfKfvY/1IAeRQERstTBbiI9CcWN85lSfWTlXwFvuWlwvtw5TRLqSbZC8QjGnJunx1Cij7JR3yo1hA==", "id"=>"9"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 9]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 12ms (ActiveRecord: 7.6ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:56:34 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 48ms (Views: 45.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/new" for 127.0.0.1 at 2017-04-21 07:56:36 +0400
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (9.4ms)
+  Rendered students/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 55ms (Views: 52.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/students/new" for 127.0.0.1 at 2017-04-21 07:57:16 +0400
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (6.9ms)
+  Rendered students/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 51ms (Views: 48.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 07:57:23 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wSysyHW9TSlO9y21jtBxg1YfzScigDAfAJJxEOi0g/4BF8eoCic3oFiwlpiwGdmEpga5b3hJ1XKr2E6yrszLHg==", "student"=>{"name"=>"sdsd", "last_name"=>"xds", "person_id"=>"fdds", "birth_date(1i)"=>"2001", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "birth_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "sdsd"], ["last_name", "xds"], ["person_id", 0], ["birth_date", Sat, 21 Apr 2001], ["created_at", 2017-04-21 03:57:23 UTC], ["updated_at", 2017-04-21 03:57:23 UTC]]
+  [1m[35m (23.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/10
+Completed 302 Found in 30ms (ActiveRecord: 24.0ms)
+
+
+Started GET "/students/10" for 127.0.0.1 at 2017-04-21 07:57:23 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 47ms (Views: 43.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:57:27 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 49ms (Views: 47.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/students/10/edit" for 127.0.0.1 at 2017-04-21 07:57:29 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/edit.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 54ms (Views: 50.3ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/students/10" for 127.0.0.1 at 2017-04-21 07:57:32 +0400
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5WV8Hy6DvsV17LhqvDyDwIVknmbXfWn1cMpzrT+yonCWooXskx6sLuSl7OmEXfmurIZQzqc9sHcanlZSl14eEA==", "student"=>{"name"=>"sdsd", "last_name"=>"xds", "person_id"=>"2", "birth_date(1i)"=>"2001", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student", "id"=>"10"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `find' for nil:NilClass):
+  
+app/controllers/students_controller.rb:30:in `update'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.2ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.5ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (37.8ms)
+Started PATCH "/students/10" for 127.0.0.1 at 2017-04-21 07:57:59 +0400
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5WV8Hy6DvsV17LhqvDyDwIVknmbXfWn1cMpzrT+yonCWooXskx6sLuSl7OmEXfmurIZQzqc9sHcanlZSl14eEA==", "student"=>{"name"=>"sdsd", "last_name"=>"xds", "person_id"=>"2", "birth_date(1i)"=>"2001", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student", "id"=>"10"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "students" SET "person_id" = $1, "updated_at" = $2 WHERE "students"."id" = $3[0m  [["person_id", 2], ["updated_at", 2017-04-21 03:58:00 UTC], ["id", 10]]
+  [1m[35m (16.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/10
+Completed 302 Found in 48ms (ActiveRecord: 23.9ms)
+
+
+Started GET "/students/10" for 127.0.0.1 at 2017-04-21 07:58:00 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mStudent Load (1.3ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 49ms (Views: 45.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:58:02 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 45ms (Views: 41.9ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/students/6" for 127.0.0.1 at 2017-04-21 07:58:06 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"lxeZdbf9tw0DX13xbAnxEjAnx0ALYN0T9UrXXXookexXLPIVyGfNhBUY5txSwFkVwD6zCFGpOH5eAOj/PFDZDA==", "id"=>"6"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 6]]
+  [1m[35m (10.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 16ms (ActiveRecord: 11.7ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:58:06 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 47ms (Views: 44.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/students/8" for 127.0.0.1 at 2017-04-21 07:58:07 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 43ms (Views: 40.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:58:08 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 66ms (Views: 63.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/10/edit" for 127.0.0.1 at 2017-04-21 07:58:10 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/edit.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 51ms (Views: 48.1ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/students/10" for 127.0.0.1 at 2017-04-21 07:58:14 +0400
+Processing by StudentsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qfJ/Gy5u+gZ52dYyK7WeRh6tS6ukdKK25T6qVxZrOg3aNYbok/Po7eiQgrET1OQoN0+FA9Q0ezSPao+ovoeGbQ==", "student"=>{"name"=>"sdsd", "last_name"=>"xds", "person_id"=>"3", "birth_date(1i)"=>"1984", "birth_date(2i)"=>"4", "birth_date(3i)"=>"21"}, "commit"=>"Save Student", "id"=>"10"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "students" SET "person_id" = $1, "birth_date" = $2, "updated_at" = $3 WHERE "students"."id" = $4[0m  [["person_id", 3], ["birth_date", Sat, 21 Apr 1984], ["updated_at", 2017-04-21 03:58:14 UTC], ["id", 10]]
+  [1m[35m (50.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/10
+Completed 302 Found in 61ms (ActiveRecord: 52.5ms)
+
+
+Started GET "/students/10" for 127.0.0.1 at 2017-04-21 07:58:14 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 48ms (Views: 44.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 07:58:16 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 45ms (Views: 43.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-21 08:00:23 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 57ms (Views: 46.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-21 08:00:49 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 47ms (Views: 45.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:00:51 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (21.5ms)
+Completed 200 OK in 69ms (Views: 57.7ms | ActiveRecord: 5.9ms)
+
+
+Started DELETE "/schools/8" for 127.0.0.1 at 2017-04-21 08:00:55 +0400
+Processing by SchoolsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"zaRoME9V+ef5oUVq7HcDfo0uHHjSXpfacq+7e5VDaKMNnwNQMM+Dbu/m/kfSvqt5fTdoMIiXcrfZ5YTZ0zsgQw==", "id"=>"8"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "schools" WHERE "schools"."id" = $1[0m  [["id", 8]]
+  [1m[35m (11.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools
+Completed 302 Found in 18ms (ActiveRecord: 12.8ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:00:55 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 64ms (Views: 61.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools/7/edit" for 127.0.0.1 at 2017-04-21 08:00:57 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/_form.html.erb (6.0ms)
+  Rendered schools/edit.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 49ms (Views: 46.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 08:01:00 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Y0X0J51BHuEhVC7BQ6m6a0dXxQ/RUn3hYwPqWJptPezn6TiUBdiI1LKneSJcD5jwnOvzbVtsHxLQeLjnuhiBAA==", "school"=>{"name"=>"saaas", "address"=>"Asasasa", "student_amount"=>"24"}, "commit"=>"Save School"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "saaas"], ["address", "Asasasa"], ["student_amount", 24], ["created_at", 2017-04-21 04:01:00 UTC], ["updated_at", 2017-04-21 04:01:00 UTC]]
+  [1m[35m (13.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/10
+Completed 302 Found in 21ms (ActiveRecord: 14.3ms)
+
+
+Started GET "/schools/10" for 127.0.0.1 at 2017-04-21 08:01:00 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 47ms (Views: 44.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:01:02 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 50ms (Views: 47.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:02:50 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 45ms (Views: 42.7ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/schools/10" for 127.0.0.1 at 2017-04-21 08:02:54 +0400
+Processing by SchoolsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"qqlsvVe7q4tA2LcfPFplrFPzJilGsGeTtz8OsTB0/OZqkgfdKCHRAlafDDICk82ro+pSYRx5gv4cdTETdgy0Bg==", "id"=>"10"}
+  [1m[36mSchool Load (0.3ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schools" WHERE "schools"."id" = $1[0m  [["id", 10]]
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools
+Completed 302 Found in 46ms (ActiveRecord: 41.6ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:02:54 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.7ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 49ms (Views: 46.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/schools/7/edit" for 127.0.0.1 at 2017-04-21 08:02:56 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/edit.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 48ms (Views: 44.5ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/schools" for 127.0.0.1 at 2017-04-21 08:02:59 +0400
+  
+ActionController::RoutingError (No route matches [PATCH] "/schools"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (9.3ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.7ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (51.0ms)
+Started PATCH "/schools" for 127.0.0.1 at 2017-04-21 08:03:21 +0400
+  
+ActionController::RoutingError (No route matches [PATCH] "/schools"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (10.2ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.1ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.6ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (52.2ms)
+Started PATCH "/schools" for 127.0.0.1 at 2017-04-21 08:03:24 +0400
+  
+ActionController::RoutingError (No route matches [PATCH] "/schools"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.8.2) lib/puma/configuration.rb:224:in `call'
+puma (3.8.2) lib/puma/server.rb:600:in `handle_request'
+puma (3.8.2) lib/puma/server.rb:435:in `process_client'
+puma (3.8.2) lib/puma/server.rb:299:in `block in run'
+puma (3.8.2) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered collection of /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (9.4ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.5ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (50.6ms)
+Started GET "/" for 127.0.0.1 at 2017-04-21 08:03:29 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 42ms (Views: 40.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:03:31 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 51ms (Views: 48.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools/9/edit" for 127.0.0.1 at 2017-04-21 08:03:33 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/edit.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 50ms (Views: 46.6ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/schools/9" for 127.0.0.1 at 2017-04-21 08:03:38 +0400
+Processing by SchoolsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+ZbTNKF7KPCyrVDE88g1M0Sb32mKbc+YxPWbDXSqTrYcAEUHr5ZUSbLbAaBjulB64rAloJ7mClYKo2qZaVA4kg==", "school"=>{"name"=>"51-s sajaro", "address"=>"filarmoniastanaa", "student_amount"=>"151"}, "commit"=>"Save School", "id"=>"9"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Student with 'id'=9):
+  
+app/controllers/schools_controller.rb:30:in `update'
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (7.0ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendering /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (4.4ms)
+  Rendered /home/beqa/vendor/bundle/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (42.4ms)
+Started PATCH "/schools/9" for 127.0.0.1 at 2017-04-21 08:04:11 +0400
+Processing by SchoolsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+ZbTNKF7KPCyrVDE88g1M0Sb32mKbc+YxPWbDXSqTrYcAEUHr5ZUSbLbAaBjulB64rAloJ7mClYKo2qZaVA4kg==", "school"=>{"name"=>"51-s sajaro", "address"=>"filarmoniastanaa", "student_amount"=>"151"}, "commit"=>"Save School", "id"=>"9"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "schools" SET "student_amount" = $1, "updated_at" = $2 WHERE "schools"."id" = $3[0m  [["student_amount", 151], ["updated_at", 2017-04-21 04:04:11 UTC], ["id", 9]]
+  [1m[35m (14.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/9
+Completed 302 Found in 43ms (ActiveRecord: 20.8ms)
+
+
+Started GET "/schools/9" for 127.0.0.1 at 2017-04-21 08:04:11 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 50ms (Views: 47.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:04:13 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 80ms (Views: 77.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/schools/7/edit" for 127.0.0.1 at 2017-04-21 08:04:15 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/edit.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 63ms (Views: 60.0ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/schools/7" for 127.0.0.1 at 2017-04-21 08:04:19 +0400
+Processing by SchoolsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"k4+9yMg2XB2tA8qyDLFRD7WVOU83fz6W8FLvZSplKdLf3oKiR6mAmIQECr7upnQ5qiMU2Rg9mpJjtwpOO1rXpw==", "school"=>{"name"=>"saaas", "address"=>"Asasasa", "student_amount"=>"232"}, "commit"=>"Save School", "id"=>"7"}
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE "schools" SET "student_amount" = $1, "updated_at" = $2 WHERE "schools"."id" = $3[0m  [["student_amount", 232], ["updated_at", 2017-04-21 04:04:19 UTC], ["id", 7]]
+  [1m[35m (33.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/7
+Completed 302 Found in 44ms (ActiveRecord: 35.2ms)
+
+
+Started GET "/schools/7" for 127.0.0.1 at 2017-04-21 08:04:19 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 61ms (Views: 58.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:04:20 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 89ms (Views: 86.4ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/schools/9" for 127.0.0.1 at 2017-04-21 08:04:26 +0400
+Processing by SchoolsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"m+es274HfoSFSPsRW0SYR0c3acHvcFt9ktUKpGvcI0lb3Me7wZ0EDZMPQDxljTBAty4dibW5vhA5nzUGLaRrqQ==", "id"=>"9"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "schools" WHERE "schools"."id" = $1[0m  [["id", 9]]
+  [1m[35m (12.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools
+Completed 302 Found in 18ms (ActiveRecord: 14.0ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:04:26 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 50ms (Views: 48.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools/5/edit" for 127.0.0.1 at 2017-04-21 08:04:29 +0400
+Processing by SchoolsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering schools/edit.html.erb within layouts/application
+  Rendered schools/edit.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 48ms (Views: 44.7ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/schools/5" for 127.0.0.1 at 2017-04-21 08:04:32 +0400
+Processing by SchoolsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EP/A8Boqs5NOT4HN1DyvL+BsKn0Kwn696Mq0mWvPEfUM9BC1WU9yachZu/ijZ31jHcjKMi1Z9Fcmnd0coA+gYA==", "school"=>{"name"=>"51-s sajaro", "address"=>"filarmoniastanaa", "student_amount"=>"100"}, "commit"=>"Save School", "id"=>"5"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "schools" SET "student_amount" = $1, "updated_at" = $2 WHERE "schools"."id" = $3[0m  [["student_amount", 100], ["updated_at", 2017-04-21 04:04:32 UTC], ["id", 5]]
+  [1m[35m (17.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/5
+Completed 302 Found in 25ms (ActiveRecord: 18.6ms)
+
+
+Started GET "/schools/5" for 127.0.0.1 at 2017-04-21 08:04:32 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mSchool Load (0.4ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 46ms (Views: 43.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:04:34 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (1.1ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 48ms (Views: 45.0ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/schools/new" for 127.0.0.1 at 2017-04-21 08:04:43 +0400
+Processing by SchoolsController#new as HTML
+  Rendering schools/new.html.erb within layouts/application
+  Rendered schools/_form.html.erb (4.1ms)
+  Rendered schools/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 50ms (Views: 47.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/schools" for 127.0.0.1 at 2017-04-21 08:04:47 +0400
+Processing by SchoolsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qDj7dvv4mNDaTXpFuvQ4cHN8YjLscW8qz7rMoTM5L8kslDfFY2EO5Um+LaalUhrrqMBUUGZPDdl8wZ4eE0yTJQ==", "school"=>{"name"=>"dds", "address"=>"dsa", "student_amount"=>"sdasda"}, "commit"=>"Save School"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schools" ("name", "address", "student_amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dds"], ["address", "dsa"], ["student_amount", 0], ["created_at", 2017-04-21 04:04:47 UTC], ["updated_at", 2017-04-21 04:04:47 UTC]]
+  [1m[35m (62.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/schools/11
+Completed 302 Found in 69ms (ActiveRecord: 64.0ms)
+
+
+Started GET "/schools/11" for 127.0.0.1 at 2017-04-21 08:04:47 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mSchool Load (0.3ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 42ms (Views: 38.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/schools" for 127.0.0.1 at 2017-04-21 08:04:48 +0400
+Processing by SchoolsController#index as HTML
+  Rendering schools/index.html.erb within layouts/application
+  [1m[36mSchool Load (0.6ms)[0m  [1m[34mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/index.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 51ms (Views: 48.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/schools/11" for 127.0.0.1 at 2017-04-21 08:04:54 +0400
+Processing by SchoolsController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mSchool Load (0.5ms)[0m  [1m[34mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  Rendering schools/show.html.erb within layouts/application
+  Rendered schools/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 65ms (Views: 61.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/welcome/index" for 127.0.0.1 at 2017-04-21 08:04:59 +0400
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 45ms (Views: 43.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 08:05:02 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (24.2ms)
+Completed 200 OK in 69ms (Views: 55.1ms | ActiveRecord: 9.3ms)
+
+
+Started GET "/students/new" for 127.0.0.1 at 2017-04-21 08:05:04 +0400
+Processing by StudentsController#new as HTML
+  Rendering students/new.html.erb within layouts/application
+  Rendered students/_form.html.erb (9.1ms)
+  Rendered students/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 54ms (Views: 52.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/students" for 127.0.0.1 at 2017-04-21 08:05:14 +0400
+Processing by StudentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zM4iLp1d+d73Zwt3dY/52fMQyyKfje1OOB6bj5vY9QpQuI/VipyQRAi0eE5HsPc0wn0jTRn/GqnfuOdzmMmcdw==", "student"=>{"name"=>"gio", "last_name"=>"sa", "person_id"=>"sa", "birth_date(1i)"=>"2000", "birth_date(2i)"=>"1", "birth_date(3i)"=>"4"}, "commit"=>"Save Student"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "students" ("name", "last_name", "person_id", "birth_date", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "gio"], ["last_name", "sa"], ["person_id", 0], ["birth_date", Tue, 04 Jan 2000], ["created_at", 2017-04-21 04:05:14 UTC], ["updated_at", 2017-04-21 04:05:14 UTC]]
+  [1m[35m (26.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students/11
+Completed 302 Found in 34ms (ActiveRecord: 27.8ms)
+
+
+Started GET "/students/11" for 127.0.0.1 at 2017-04-21 08:05:14 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 47ms (Views: 42.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 08:05:15 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 48ms (Views: 45.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/8" for 127.0.0.1 at 2017-04-21 08:05:18 +0400
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering students/show.html.erb within layouts/application
+  Rendered students/show.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 42ms (Views: 39.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/students/10/edit" for 127.0.0.1 at 2017-04-21 08:05:21 +0400
+Processing by StudentsController#edit as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  Rendering students/edit.html.erb within layouts/application
+  Rendered students/edit.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 49ms (Views: 46.1ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/students/11" for 127.0.0.1 at 2017-04-21 08:05:27 +0400
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"22KHEv9azwEAQ24SjxRQop442DRRunUvzcM7T+dK2K0bWexygMC1iBYE1T+x3filbiGsfAtzkEJmiQTtoTKQTQ==", "id"=>"11"}
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT  "students".* FROM "students" WHERE "students"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 11]]
+  [1m[35m (21.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/students
+Completed 302 Found in 27ms (ActiveRecord: 22.4ms)
+
+
+Started GET "/students" for 127.0.0.1 at 2017-04-21 08:05:27 +0400
+Processing by StudentsController#index as HTML
+  Rendering students/index.html.erb within layouts/application
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  Rendered students/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 63ms (Views: 60.8ms | ActiveRecord: 0.6ms)
+
+

@@ -1,0 +1,22 @@
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @student.last_name %>
+</p>
+
+<p>
+  <strong>person_id:</strong>
+  <%= @student.person_id %>
+</p>
+
+<p>
+  <strong>birth_Date:</strong>
+  <%= @student.birth_date %>
+</p>
+
+<%= link_to 'edit student', edit_student_path %>
+<%= link_to 'students list', students_path %>
