@@ -2484,3 +2484,26 @@ Processing by StudentsController#index as HTML
 Completed 200 OK in 63ms (Views: 60.8ms | ActiveRecord: 0.6ms)
 
 
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3034178888035282470);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (50.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateCountries (20170422184655)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (478.8ms)[0m  [1m[35mCREATE TABLE "countries" ("id" serial primary key, "name" character varying, "code" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170422184655"]]
+  [1m[35m (25.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCities (20170422185001)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (96.3ms)[0m  [1m[35mCREATE TABLE "cities" ("id" serial primary key, "name" character varying, "code" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "cities" ADD "country_id" integer[0m
+  [1m[35m (43.9ms)[0m  [1m[35mCREATE  INDEX  "index_cities_on_country_id" ON "cities"  ("country_id")[0m
+  [1m[35m (21.2ms)[0m  [1m[35mALTER TABLE "cities" ADD CONSTRAINT "fk_rails_996e05be41"
+FOREIGN KEY ("country_id")
+  REFERENCES "countries" ("id")
+[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170422185001"]]
+  [1m[35m (11.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (23.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3034178888035282470)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
